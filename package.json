@@ -1,0 +1,30 @@
+{
+  "name": "pwa-experiment",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.0.0",
+    "socket.io-client": "^3.0.0"
+  },
+  "devDependencies": {
+    "prettier": "2.1.2",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davemenninger/pwa-experiment.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davemenninger/pwa-experiment/issues"
+  },
+  "homepage": "https://github.com/davemenninger/pwa-experiment#readme",
+  "description": ""
+}

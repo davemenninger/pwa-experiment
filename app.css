@@ -1,0 +1,118 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /*
+   * https://randoma11y.com/
+   */
+  --main-fg-color: #9f54d0;
+  --main-bg-color: #01020e;
+}
+
+html {
+  font-family: "Lucida Sans", sans-serif;
+  background-color: var(--main-bg-color);
+  color: var(--main-fg-color);
+}
+
+.menu {
+  width: 25%;
+  float: left;
+  background-color: var(--main-bg-color);
+  color: var(--main-fg-color);
+}
+
+[class*="menu"] {
+  width: 100%;
+}
+
+.main {
+  width: 75%;
+  float: left;
+  background-color: var(--main-bg-color);
+  color: var(--main-fg-color);
+  padding: 9px;
+}
+
+[class*="main"] {
+  width: 100%;
+}
+
+.header {
+  background-color: var(--main-fg-color);
+  color: var(--main-bg-color);
+  padding: 15px;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  background-color var(--main-bg-color);
+  border-radius: 4px;
+  border: thin solid;
+  color: var(--main-fg-color);
+  margin-bottom: 7px;
+  padding: 3px;
+}
+
+.menu li:hover {
+  background-color: var(--main-fg-color);
+  color: var(--main-bg-color);
+}
+
+.footer {
+  background-color: var(--main-fg-color);
+  bottom: 0;
+  color: var(--main-bg-color);
+  left: 0;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .menu {
+    width: 25%;
+    float: left;
+  }
+  .main {
+    width: 75%;
+    float: left;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}
+
+/* If the screen size is 601px or more, set the font-size of <div> to 80px */
+@media only screen and (min-width: 601px) {
+  .main {
+    font-size: 60px;
+  }
+}
+
+/* If the screen size is 600px or less, set the font-size of <div> to 30px */
+@media only screen and (max-width: 600px) {
+  .main {
+    font-size: 30px;
+  }
+}
