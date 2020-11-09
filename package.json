@@ -4,14 +4,17 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "idb-keyval": "^3.2.0",
     "socket.io": "^3.0.0",
-    "socket.io-client": "^3.0.0"
+    "socket.io-client": "^3.0.0",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "prettier": "2.1.2",

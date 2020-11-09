@@ -1,8 +1,10 @@
-console.log("i'm sw");
+import { set, get } from "idb-keyval";
+
+console.log("i'm the new sw!!!");
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open("v1").then((cache) => {
+    caches.open("v2").then((cache) => {
       return cache.addAll([
         "index.html",
         "app.css",
