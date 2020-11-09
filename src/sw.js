@@ -1,16 +1,36 @@
 import { set, get } from "idb-keyval";
 
-console.log("i'm the new sw!!!");
+const current_cache_version = "v4";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open("v2").then((cache) => {
+    caches.open(current_cache_version).then((cache) => {
+      get("client_id").then(function (val) {
+        console.log("current client_id: " + val);
+      });
+
       return cache.addAll([
         "index.html",
         "app.css",
         "main.js",
         "android-chrome-192x192.png",
       ]);
+    })
+  );
+});
+
+self.addEventListener("activate", (event) => {
+  var cacheKeeplist = [current_cache_version];
+
+  event.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(
+        keyList.map((key) => {
+          if (cacheKeeplist.indexOf(key) === -1) {
+            return caches.delete(key);
+          }
+        })
+      );
     })
   );
 });
