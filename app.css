@@ -65,6 +65,18 @@ html {
   color: var(--main-bg-color);
 }
 
+.button {
+  background-color: var(--main-fg-color); /* Green */
+  border: thin solid;
+  border-radius: 6px;
+  color: var(--main-bg-color);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 .footer {
   background-color: var(--main-fg-color);
   bottom: 0;
