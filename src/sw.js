@@ -1,6 +1,6 @@
 import { set, get } from "idb-keyval";
 
-const current_cache_version = "a";
+const current_cache_version = "v6";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -10,10 +10,10 @@ self.addEventListener("install", (event) => {
       });
 
       return cache.addAll([
-        "index.html",
-        "app.css",
-        "main.js",
-        "android-chrome-192x192.png",
+        "/",
+        "/app.css",
+        "/main.js",
+        "/android-chrome-192x192.png",
       ]);
     })
   );

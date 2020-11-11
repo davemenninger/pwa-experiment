@@ -28,11 +28,11 @@ app.set('view engine', 'pug')
 
 app.get("/", (req, res) => {
   console.log(req.session);
-  res.sendFile(__dirname + "/index.html");
+  res.render('index', {});
 });
 
 app.get("/index.html", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.render('index', {});
 });
 
 app.get("/app.css", (req, res) => {
