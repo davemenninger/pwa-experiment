@@ -165,4 +165,8 @@ function createGame(client_id) {
 function Game(game_id, client_id) {
   this.game_id = game_id;
   this.players = [client_id];
+  this.game_state =
+    ['x', '', '',
+      '', '', '',
+      '', '', '']
 }

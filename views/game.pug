@@ -1,6 +1,21 @@
 mixin qrcode(game_id)
   img(src="/game/qr/" + game_id)
 
+mixin game_board(game_state)
+  table.game_board
+    tr
+      td.top_left= game_state[0]
+      td= game_state[1]
+      td.top_right= game_state[2]
+    tr
+      td= game_state[3]
+      td= game_state[4]
+      td= game_state[5]
+    tr
+      td.bottom_left= game_state[6]
+      td= game_state[7]
+      td.bottom_right= game_state[8]
+
 doctype html
 html
   head
@@ -14,7 +29,7 @@ html
         li
           a(href="/") home
     .main
-      p game_id: #{game.game_id}
+      +game_board(game.game_state)
       | players:
       ul
         each p in game.players

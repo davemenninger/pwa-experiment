@@ -39,6 +39,41 @@ html {
   width: 100%;
 }
 
+table.game_board {
+  border-collapse: collapse;
+  text-align: center;
+  width: 90vw;
+}
+
+td {
+  width: 30vw;
+  height: 30vw;
+}
+
+td.top_left {
+  border-bottom: 1px solid var(--main-fg-color);
+  border-right: 1px solid var(--main-fg-color);
+}
+
+td.top_right {
+  border-bottom: 1px solid var(--main-fg-color);
+  border-left: 1px solid var(--main-fg-color);
+}
+
+td.center {
+  border: 1px solid var(--main-fg-color);
+}
+
+td.bottom_left {
+  border-top: 1px solid var(--main-fg-color);
+  border-right: 1px solid var(--main-fg-color);
+}
+
+td.bottom_right {
+  border-top: 1px solid var(--main-fg-color);
+  border-left: 1px solid var(--main-fg-color);
+}
+
 .header {
   background-color: var(--main-fg-color);
   color: var(--main-bg-color);
