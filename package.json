@@ -14,6 +14,7 @@
     "express-session": "^1.17.1",
     "idb-keyval": "^3.2.0",
     "pug": "^3.0.0",
+    "qrcode": "^1.4.4",
     "socket.io": "^3.0.0",
     "socket.io-client": "^3.0.0",
     "uuid": "^8.3.1"

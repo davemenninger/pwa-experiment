@@ -4,6 +4,8 @@ const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const seconds_per_tick = 12;
+const QRCode = require('qrcode');
+
 
 let port = process.env.PORT;
 if (port == null || port == "") {
@@ -87,6 +89,18 @@ app.get("/game/:game_id", (req, res) => {
   else{
     res.render('game', {game: game});
   }
+});
+
+app.get("/game/qr/:game_id", (req, res) => {
+  console.log("IMAGE REQUEST");
+  console.log(req.params);
+  var game_id = req.params.game_id;
+  const proxyHost = req.headers["x-forwarded-host"];
+  const host = proxyHost ? proxyHost : req.headers.host;
+
+  res.setHeader('Content-Type', 'image/png');
+
+  QRCode.toFileStream(res, host+"/game/"+game_id);
 });
 
 app.use(express.static("redketchup"));
