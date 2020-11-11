@@ -11,7 +11,9 @@ if (port == null || port == "") {
 }
 
 const sessionMiddleware = require('express-session')({
-  secret: '21BCADF8-8770-40DB-863A-3A0532B81003'
+  secret: '21BCADF8-8770-40DB-863A-3A0532B81003',
+  resave: true,
+  saveUninitialized: true,
 });
 
 io.use(function(socket, next){
@@ -21,6 +23,8 @@ io.use(function(socket, next){
 app.use(sessionMiddleware);
 
 var games = [];
+
+app.set('view engine', 'pug')
 
 app.get("/", (req, res) => {
   console.log(req.session);
@@ -74,7 +78,15 @@ app.get("/play", (req, res) => {
 
 app.get("/game/:game_id", (req, res) => {
   console.log(req.params);
-  res.sendFile(__dirname + "/game.html");
+  var game_id = req.params.game_id;
+  game = games.find(g => g.game_id == game_id);
+  if(game === undefined){
+    console.log("no such game: "+game_id);
+    res.redirect("/");
+  }
+  else{
+    res.render('game', {game: game});
+  }
 });
 
 app.use(express.static("redketchup"));

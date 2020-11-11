@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title ddddd
+    link(rel='stylesheet', href="/app.css" type="text/css")
+    script(src="/game.js")
+  body
+    h1.header game
+    .menu
+      ul
+        li
+          a(href="/") home
+    .main
+      p game_id: #{game.game_id}
+      | players:
+      ul
+        each p in game.players
+          li= p
+    include footer.pug
