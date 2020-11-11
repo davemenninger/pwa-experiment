@@ -47,6 +47,10 @@ app.get("/sw.js", (req, res) => {
   res.sendFile(__dirname + "/dist/sw.js");
 });
 
+app.get("/game.js", (req, res) => {
+  res.sendFile(__dirname + "/dist/game.js");
+});
+
 app.get("/play", (req, res) => {
   var client_id = req.session.client_id;
   if(client_id === undefined){
@@ -87,13 +91,20 @@ io.on("connection", (socket) => {
     client_id: client_id,
   });
 
-  socket.on("tick", function (data) {
-    console.log("client tick");
+  socket.on("init", function (data) {
+    console.log("client init");
     console.log(data);
     console.log(socket.request.session);
     socket.request.session.client_id = data.client_id;
     socket.request.session.save();
     console.log(socket.request.session);
+    socket.emit("ready_player", data);
+  });
+
+  socket.on("tick", function (data) {
+    console.log("client tick");
+    socket.request.session.client_id = data.client_id;
+    socket.request.session.save();
   });
 });
 

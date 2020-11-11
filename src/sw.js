@@ -1,6 +1,6 @@
 import { set, get } from "idb-keyval";
 
-const current_cache_version = "v5";
+const current_cache_version = "c";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
