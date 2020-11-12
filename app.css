@@ -166,6 +166,14 @@ button.cell {
   .main {
     font-size: 60px;
   }
+  table.game_board {
+    height: 75vh;
+    width: auto;
+  }
+  td {
+    height: 25vh;
+    width: auto;
+  }
   button.cell {
     font-size: 120px;
   }
@@ -178,5 +186,11 @@ button.cell {
   }
   button.cell {
     font-size: 90px;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  body {
+    background-color: lightblue;
   }
 }
