@@ -71,6 +71,7 @@ app.get("/play", (req, res) => {
       }
       else{
         game.players.push(client_id);
+        game.ohs = client_id;
       }
     }
     console.log(games);
@@ -129,9 +130,26 @@ io.on("connection", (socket) => {
 
   socket.on("tick", function (data) {
     console.log("client tick");
-    socket.request.session.client_id = data.client_id;
+    var client_id = data.client_id;
+    socket.request.session.client_id = client_id;
     socket.request.session.save();
+    game = games.find(g => g.players.includes(client_id));
+    if(game !== undefined) {
+      socket.emit("game_state", { game_state: game.game_state });
+    }
   });
+
+  socket.on("move", function(data) {
+    console.log("client move");
+    console.log(data);
+    var client_id = socket.request.session.client_id;
+    game = games.find(g => g.players.includes(client_id));
+    if(game !== undefined) {
+      game.handleMove(client_id, data.cell);
+      socket.emit("game_state", { game_state: game.game_state });
+    }
+  });
+
 });
 
 http.listen(port, () => {
@@ -165,8 +183,39 @@ function createGame(client_id) {
 function Game(game_id, client_id) {
   this.game_id = game_id;
   this.players = [client_id];
+  this.exes = client_id;
+  this.ohs = null;
   this.game_state =
-    ['x', '', '',
+    ['', '', '',
       '', '', '',
-      '', '', '']
+      '', '', ''];
+
+  this.handleMove = function(client_id, cell){
+    if(this.game_state[cell] == ''){
+      if(client_id == this.exes){
+        if(this.current_turn() == "X" ){
+          this.game_state[cell] = "X";
+        }
+      }
+      else if (client_id == this.ohs){
+        if(this.current_turn() == "O" ){
+          this.game_state[cell] = "O";
+        }
+      }
+    }
+  };
+
+  this.current_turn = function(){
+    x_count = this.game_state.filter(s => s == "X").length;
+    console.log("CURRENT TURN");
+    console.log(x_count);
+    o_count = this.game_state.filter(s => s == "O").length;
+    console.log(o_count);
+    if( x_count > o_count ){
+      return "O";
+    }
+    else {
+      return "X";
+    }
+  };
 }

@@ -38,6 +38,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  Client.socket.on("game_state", function(data) {
+    console.log("game state");
+    console.log(data);
+    redrawBoard(data.game_state);
+  });
+
   Client.socket.on("disconnect", function (reason) {
     console.log("the server went away: " + reason);
     document.getElementById("connection_status").innerHTML =
@@ -52,6 +58,19 @@ document.addEventListener("DOMContentLoaded", function () {
     clientTick();
   }, seconds_per_tick * 1000);
 });
+
+window.cell_click = function(number) {
+  console.log(number);
+  console.log("sending move...");
+  Client.socket.emit("move", { cell: number });
+};
+
+function redrawBoard(game_state) {
+  for (let c = 0; c < 9; c++) {
+    var cell_id = "cell_"+c;
+    document.getElementById(cell_id).innerHTML = game_state[c];
+  }
+}
 
 function clientTick() {
   console.log("client tick");

@@ -1,20 +1,35 @@
 mixin qrcode(game_id)
   img(src="/game/qr/" + game_id)
 
+mixin button_cell(number,state)
+  if state == ''
+    button.cell(id="cell_"+number, onclick="cell_click("+number+");")= state
+  else
+    button(disabled).cell= state
+
 mixin game_board(game_state)
-  table.game_board
+  table#game_board.game_board
     tr
-      td.top_left= game_state[0]
-      td= game_state[1]
-      td.top_right= game_state[2]
+      td.top_left
+        +button_cell(0,game_state[0])
+      td
+        +button_cell(1,game_state[1])
+      td.top_right
+        +button_cell(2,game_state[2])
     tr
-      td= game_state[3]
-      td= game_state[4]
-      td= game_state[5]
+      td
+        +button_cell(3,game_state[3])
+      td.center
+        +button_cell(4,game_state[4])
+      td
+        +button_cell(5,game_state[5])
     tr
-      td.bottom_left= game_state[6]
-      td= game_state[7]
-      td.bottom_right= game_state[8]
+      td.bottom_left
+        +button_cell(6,game_state[6])
+      td
+        +button_cell(7,game_state[7])
+      td.bottom_right
+        +button_cell(8,game_state[8])
 
 doctype html
 html
