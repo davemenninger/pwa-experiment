@@ -41,7 +41,15 @@ document.addEventListener("DOMContentLoaded", function () {
   Client.socket.on("game_state", function(data) {
     console.log("game state");
     console.log(data);
-    redrawBoard(data.game_state);
+    var game_board = document.getElementById('game_board');
+    if( game_board !== null ){
+      redrawBoard(data.game_state);
+    }
+  });
+
+  Client.socket.on("win", function(data) {
+    console.log("win");
+    console.log(data);
   });
 
   Client.socket.on("disconnect", function (reason) {

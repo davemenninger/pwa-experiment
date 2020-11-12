@@ -145,8 +145,15 @@ io.on("connection", (socket) => {
     var client_id = socket.request.session.client_id;
     game = games.find(g => g.players.includes(client_id));
     if(game !== undefined) {
-      game.handleMove(client_id, data.cell);
-      socket.emit("game_state", { game_state: game.game_state });
+      winner = game.isWin();
+      if(winner === undefined){
+        game.handleMove(client_id, data.cell);
+        socket.emit("game_state", { game_state: game.game_state });
+      }
+      else{
+        console.log(winner + " is winner!");
+        socket.emit("win", { winner: winner });
+      }
     }
   });
 
@@ -193,19 +200,19 @@ function Game(game_id, client_id) {
   this.handleMove = function(client_id, cell){
     if(this.game_state[cell] == ''){
       if(client_id == this.exes){
-        if(this.current_turn() == "X" ){
+        if(this.currentTurn() == "X" ){
           this.game_state[cell] = "X";
         }
       }
       else if (client_id == this.ohs){
-        if(this.current_turn() == "O" ){
+        if(this.currentTurn() == "O" ){
           this.game_state[cell] = "O";
         }
       }
     }
   };
 
-  this.current_turn = function(){
+  this.currentTurn = function(){
     x_count = this.game_state.filter(s => s == "X").length;
     console.log("CURRENT TURN");
     console.log(x_count);
@@ -217,5 +224,24 @@ function Game(game_id, client_id) {
     else {
       return "X";
     }
+  };
+
+  this.isWin = function(){
+    return this.isThreeMatch(0,1,2)
+    || this.isThreeMatch(3,4,5)
+    || this.isThreeMatch(6,7,8)
+    || this.isThreeMatch(0,3,6)
+    || this.isThreeMatch(1,4,7)
+    || this.isThreeMatch(2,5,8)
+    || this.isThreeMatch(0,4,8)
+    || this.isThreeMatch(2,4,6)
+    || undefined;
+  };
+
+  this.isThreeMatch = function(a,b,c){
+    if(this.game_state[a] == ''){ return false; }
+    if(this.game_state[a] != this.game_state[b]){ return false; }
+    if(this.game_state[b] != this.game_state[c]){ return false; }
+    return this.game_state[a];
   };
 }

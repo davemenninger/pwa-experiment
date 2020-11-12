@@ -5,9 +5,6 @@ const current_cache_version = "v7";
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(current_cache_version).then((cache) => {
-      get("client_id").then(function (val) {
-        console.log("current client_id: " + val);
-      });
 
       return cache.addAll([
         "/",

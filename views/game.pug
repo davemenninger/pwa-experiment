@@ -5,7 +5,7 @@ mixin button_cell(number,state)
   if state == ''
     button.cell(id="cell_"+number, onclick="cell_click("+number+");")= state
   else
-    button(disabled).cell= state
+    button(id="cell_"+number, disabled).cell= state
 
 mixin game_board(game_state)
   table#game_board.game_board
