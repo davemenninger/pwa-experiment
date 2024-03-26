@@ -1,4 +1,4 @@
-# pwa-experiment
+# Tic-Tac-Toe
 
 A minimal installable PWA, with:
 
@@ -8,6 +8,8 @@ A minimal installable PWA, with:
 * socket.io
 * webpack
 * responsive
+
+Oh, by the way - it's a Tic-Tac-Toe game. :)
 
 # references
 
